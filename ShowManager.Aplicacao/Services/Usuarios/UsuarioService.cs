@@ -1,5 +1,5 @@
 ﻿using ShowManager.Dominio.Features.Usuarios;
-using ShowManager.Infra.Repository.Usuarios;
+using ShowManager.Infra.DataBase.Repository.Usuarios;
 
 namespace ShowManager.Aplicacao.features.Usuarios;
 
