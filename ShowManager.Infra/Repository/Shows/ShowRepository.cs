@@ -1,5 +1,9 @@
-﻿namespace ShowManager.Infra.DataBase.Repository.Shows;
+﻿using ShowManager.Dominio.Features.Shows;
+using ShowManager.Infra.Context;
 
-public class ShowRepository
+namespace ShowManager.Infra.DataBase.Repository.Shows;
+
+public class ShowRepository Repository<Show>, IShowRepository
 {
+    private readonly 
 }

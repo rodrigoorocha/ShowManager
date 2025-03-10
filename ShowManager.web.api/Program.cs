@@ -1,3 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using ShowManager.Infra.Context;
+using ShowManager.Infra.DataBase.Repository.Organizadores;
+using ShowManager.Infra.DataBase.Repository.Shows;
+using ShowManager.Infra.DataBase.Repository.Usuarios;
+
 namespace ShowManager.web.api
 {
     public class Program
@@ -6,19 +12,22 @@ namespace ShowManager.web.api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Adicionando o DbContext com SQL Server
+            builder.Services.AddDbContext<ShowManagerContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // Registrando os repositórios
+            builder.Services.AddScoped<IOrganizadorRepository, OrganizadorRepository>();
+            builder.Services.AddScoped<IShowRepository, ShowRepository>();
+            builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             builder.Services.AddControllers();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-
+            // Configuração do pipeline HTTP
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

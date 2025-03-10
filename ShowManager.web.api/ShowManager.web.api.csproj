@@ -6,4 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ShowManager.Aplicacao\ShowManager.Aplicacao.csproj" />
+	  <ProjectReference Include="..\ShowManager.Dominio\ShowManager.Dominio.csproj" />
+	  <ProjectReference Include="..\ShowManager.Infra\ShowManager.Infra.csproj" />
+	</ItemGroup>
+
 </Project>

@@ -10,5 +10,6 @@ public class Show : Entidade
     public DateTime DataFim { get; set; }
     public int NumeroParticipantes { get; set; }
     public TimeSpan Duracao { get; set; }
+    public int OrganizadorId { get; set; }
     public Organizador Organizador  { get; set; }
 }
