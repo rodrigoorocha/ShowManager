@@ -1,4 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using ShowManager.Dominio.Features.Organizadores;
+using ShowManager.Dominio.Features.Shows;
+using ShowManager.Dominio.Features.Usuarios;
 using ShowManager.Infra.Context;
 using ShowManager.Infra.DataBase.Repository.Organizadores;
 using ShowManager.Infra.DataBase.Repository.Shows;

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShowManager.Dominio.Features.Organizadores;
+using ShowManager.Infra.Context;
 
 namespace ShowManager.Infra.DataBase.Repository.Organizadores;
 
- public class OrganizadorRepository
+public class OrganizadorRepository : Repository<Organizador>, IOrganizadorRepository
 {
+    public OrganizadorRepository(ShowManagerContext context) : base(context)
+    {
+    }
 }
