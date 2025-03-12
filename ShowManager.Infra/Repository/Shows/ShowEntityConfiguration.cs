@@ -1,8 +1,4 @@
-﻿
-
-
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShowManager.Dominio.Features.Shows;
 
@@ -10,8 +6,6 @@ namespace ShowManager.Infra.Repository.Shows;
 
 class ShowEntityConfiguration : IEntityTypeConfiguration<Show>
 {
-
-
     public void Configure(EntityTypeBuilder<Show> builder)
     {
         builder.ToTable("Shows");
@@ -23,12 +17,12 @@ class ShowEntityConfiguration : IEntityTypeConfiguration<Show>
             .IsRequired();
 
         builder.Property(o => o.DataInicio)
-            .HasDefaultValue(DateTime.MinValue)
+            .HasDefaultValue(new DateTime(2000, 1, 1))
             .HasColumnType("datetime2(0)")
             .IsRequired(false);
 
         builder.Property(o => o.DataFim)
-            .HasDefaultValue(DateTime.MinValue)
+            .HasDefaultValue(new DateTime(2000, 1, 1))
             .HasColumnType("datetime2(0)")
             .IsRequired(false);
 
@@ -38,8 +32,8 @@ class ShowEntityConfiguration : IEntityTypeConfiguration<Show>
             .IsRequired(false);
 
         builder.Property(o => o.Duracao)
-            .HasDefaultValue(0)
-            .HasColumnType("int")
+            .HasDefaultValue(new TimeSpan(0))
+            .HasColumnType("time")
             .IsRequired(false);
 
         //relacionamento
@@ -48,7 +42,5 @@ class ShowEntityConfiguration : IEntityTypeConfiguration<Show>
             .WithMany(o => o.ListaShows)
             .HasForeignKey(s => s.OrganizadorId)
             .OnDelete(DeleteBehavior.Restrict);
-
-
     }
 }

@@ -8,9 +8,9 @@ namespace ShowManager.web.api.Controllers
     public class ShowController : ControllerBase
     {
 
-        [HttpPost]
-        public IActionResult CriarShow()
-        {
-        }
+        //[HttpPost]
+        //public IActionResult CriarShow()
+        //{
+        //}
     }
 }

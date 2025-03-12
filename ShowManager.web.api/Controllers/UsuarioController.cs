@@ -7,9 +7,9 @@ namespace ShowManager.web.api.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult CriarUsuario()
-        {
-        }
+        //[HttpPost]
+        //public IActionResult CriarUsuario()
+        //{
+        //}
     }
 }

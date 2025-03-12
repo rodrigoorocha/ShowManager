@@ -12,15 +12,11 @@ public class ShowManagerContext : DbContext
 
     }
 
-    public DbSet<Organizador> Organizador { get; set; }
-    public DbSet<Show> Show { get; set; }
-    public DbSet<Usuario> Usuario { get; set; }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        //optionsBuilder.UseLazyLoadingProxies();
-        base.OnConfiguring(optionsBuilder);
-    }
-
+    public DbSet<Organizador> Organizadores { get; set; }
+    public DbSet<Show> Shows { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
+    
+   
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ShowManagerContext).Assembly);
