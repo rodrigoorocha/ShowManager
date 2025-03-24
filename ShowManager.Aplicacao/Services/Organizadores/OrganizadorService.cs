@@ -1,40 +1,47 @@
-﻿using ShowManager.Dominio.Features.Organizadores;
+﻿using Microsoft.VisualBasic;
+using ShowManager.Dominio.DTO;
+using ShowManager.Dominio.Features.Organizadores;
 using ShowManager.Infra.DataBase.Repository.Organizadores;
 
 namespace ShowManager.Aplicacao.Services.Organizadores;
 
-public class OrganizadorService : IOrganizador
+public class OrganizadorService(OrganizadorRepository _organizadorRepository) : IOrganizadorService
 {
-
-    private readonly OrganizadorRepository organizadoresRepository;
-
-    public OrganizadorService(OrganizadorRepository organizadoresRepository)
+    public async Task AtualizarAsync(Organizador organizadoroAtualizado)
     {
-        this.organizadoresRepository = organizadoresRepository;
+        var OrganizadorDoBanco = await BuscarPorIDAsync(organizadoroAtualizado.Id);
+
+        OrganizadorDoBanco.Atualizar(organizadoroAtualizado);
+
+        await _organizadorRepository.SaveChangesAsync();
     }
 
-    public Task<string> Atulizar(Organizador organizador)
+    public async Task<Organizador> BuscarPorIDAsync(int id)
     {
-        throw new NotImplementedException();
+        var organizador = await _organizadorRepository.BuscarPorIdAsync(id);
+
+        if (organizador is null)
+        {
+            //NotFound
+            throw new Exception();
+        }
+
+        return organizador;
     }
 
-    public Task<string> Buscar()
+    public async Task CriarAsync(Organizador organizador)
     {
-        throw new NotImplementedException();
+        await _organizadorRepository.Adicionar(organizador, true);
     }
 
-    public Task<string> BuscarPorID(int id)
+    public async Task DeletarAsync(int id)
     {
-        throw new NotImplementedException();
-    }
+        var registrosDeletados = await _organizadorRepository.DeleteAsync(id);
 
-    public Task<string> Criar(Organizador organizador)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<string> Deletar(int id)
-    {
-        throw new NotImplementedException();
+        if (registrosDeletados == 0)
+        {
+            //NotFound
+            throw new Exception();
+        }
     }
 }

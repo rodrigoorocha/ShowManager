@@ -5,17 +5,17 @@ VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowManager.web.api", "ShowManager.web.api\ShowManager.web.api.csproj", "{0E5F46CA-289E-4F93-A5B8-C318E8276108}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apresentacao", "Apresentacao", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Apresentacao", "1.Apresentacao", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aplicacao", "Aplicacao", "{C882F543-35BA-4EB4-8348-D66C2DFE6353}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Aplicacao", "2.Aplicacao", "{C882F543-35BA-4EB4-8348-D66C2DFE6353}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowManager.Aplicacao", "ShowManager.Aplicacao\ShowManager.Aplicacao.csproj", "{F6F9B942-AD65-40C2-B2A3-0AE5F87FDA45}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dominio", "Dominio", "{0B2BA23F-2BF6-4133-9C58-E643C6BF9529}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Dominio", "3.Dominio", "{0B2BA23F-2BF6-4133-9C58-E643C6BF9529}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowManager.Dominio", "ShowManager.Dominio\ShowManager.Dominio.csproj", "{03BB7DB6-AD8F-4325-AE75-466FDE676A1C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{06CFF8DE-750C-41D3-87E2-2AF88DF94A58}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Infra", "4.Infra", "{06CFF8DE-750C-41D3-87E2-2AF88DF94A58}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowManager.Infra", "ShowManager.Infra\ShowManager.Infra.csproj", "{A7948C09-E289-45B0-9424-EB2A9975ADAA}"
 EndProject

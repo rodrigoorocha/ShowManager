@@ -1,47 +1,55 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ShowManager.Aplicacao.features.Usuarios;
 using ShowManager.Dominio.DTO;
 using ShowManager.Dominio.Features.Shows;
+using ShowManager.Dominio.Features.Usuarios;
 
 namespace ShowManager.web.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ShowController(IShowService showService) : ControllerBase
+    public class ShowController(IShowService showService, IMapper _mapper) : ControllerBase
     {
-        [Route("ObterTodos")]
-        [HttpGet]
-        public async Task<IActionResult> ObterTodos()
+        [Route("Criar")]
+        [HttpPost]
+        public async Task<IActionResult> Criar([FromBody] ShowAdicionarDTO showAdicionarDTO)
         {
-            return Ok(await showService.Buscar());
+            var show = _mapper.Map<Show>(showAdicionarDTO);
+
+            await showService.CriarAsync(show);
+
+            return Ok();
         }
 
         [Route("ObterPorID/{id}")]
         [HttpGet]
-        public async Task<IActionResult> ObterPorID([FromRoute] int id)
+        public async Task<IActionResult> ObterPorId([FromRoute] int id)
         {
-            return Ok(await showService.BuscarPorID(id));
+            var show = await showService.BuscarPorIDAsync(id);
+
+            return Ok(show);
+        }
+
+        [Route("Editar")]
+        [HttpPost]
+        public async Task<IActionResult> Editar([FromBody] ShowEditarDTO showEditarDTO)
+        {
+            var show = _mapper.Map<Show>(showEditarDTO);
+
+            await showService.AtualizarAsync(show);
+
+            return Ok();
         }
 
         [Route("Delete/{id}")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            return Ok(await showService.Deletar(id));
-        }
+            await showService.DeletarAsync(id);
 
-        [Route("CriarShow")]
-        [HttpPost]
-        public async Task<IActionResult> Criar([FromBody] ShowAdicionarDTO showAdicionarDTO)
-        {
-            return Ok(await showService.Criar(showAdicionarDTO));
-        }
-
-        [Route("EditarShow/{id}")]
-        [HttpPost]
-        public async Task<IActionResult> Editar([FromBody] ShowEditarDTO showEditarDTO, int id)
-        {
-            return Ok(await showService.Atualizar(showEditarDTO, id));
+            return Ok();
         }
     }
 }

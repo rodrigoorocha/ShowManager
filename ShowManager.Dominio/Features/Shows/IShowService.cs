@@ -5,9 +5,10 @@ namespace ShowManager.Dominio.Features.Shows;
 
 public interface IShowService
 {
-    Task<Show> Criar(ShowAdicionarDTO  showAdicionarDTO);
-    Task<int> Deletar(int id);
-    Task<Show> Atualizar(ShowEditarDTO showEditarDTO, int id);
-    Task<IEnumerable<Show>?> Buscar();
-    Task<Show?> BuscarPorID(int id);
+    Task CriarAsync(Show show);
+
+    Task<Show> BuscarPorIDAsync(int id);
+    Task AtualizarAsync(Show showAtualizado);
+    Task DeletarAsync(int id);
+
 }

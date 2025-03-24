@@ -12,4 +12,26 @@ public class Show : Entidade
     public TimeSpan? Duracao { get; set; }
     public int OrganizadorId { get; set; }
     public Organizador Organizador { get; set; }
+
+    //public void Update(ShowEditarDTO showEditarDTO)
+    //{
+    //    NomeShow = showEditarDTO.NomeShow;
+    //    DataInicio = showEditarDTO.DataInicio;
+    //    DataFim = showEditarDTO.DataFim;
+    //    NumeroParticipantes = showEditarDTO.NumeroParticipantes;
+    //    Duracao = showEditarDTO.Duracao;
+    //    OrganizadorId = showEditarDTO.OrganizadorId;
+    //    Organizador = showEditarDTO.Organizador;
+    //}
+
+    public void Atualizar(Show showAtualizado)
+    {
+        NomeShow = showAtualizado.NomeShow;
+        DataInicio = showAtualizado.DataInicio;
+        DataFim = showAtualizado.DataFim;
+        NumeroParticipantes = showAtualizado.NumeroParticipantes;
+        Duracao = showAtualizado.Duracao;
+        OrganizadorId = showAtualizado.OrganizadorId;
+        Organizador = showAtualizado.Organizador;
+    }
 }

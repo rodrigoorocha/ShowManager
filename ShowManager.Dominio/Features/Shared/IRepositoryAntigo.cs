@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShowManager.Dominio.Features.Shared
 {
-    public interface IRepository <T> where T : class
+    public interface IRepositoryAntigo <T> where T : class
     {
         Task <T>SaveAsync(T entity);
         Task DeleteAsync(int id);

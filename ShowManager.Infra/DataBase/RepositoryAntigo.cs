@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace ShowManager.Infra.DataBase.Repository;
 
-public class Repository<T> : IRepository<T> where T : Entidade
+public class RepositoryAntigo<T> : IRepositoryAntigo<T> where T : Entidade
 {
     protected DbSet<T> Query { get; set; }
     protected DbContext Context { get; set; }
 
-    public Repository(ShowManagerContext context)
+    public RepositoryAntigo(ShowManagerContext context)
     {
         this.Context = context;
         this.Query = Context.Set<T>();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShowManager.Dominio.DTO;
 using ShowManager.Dominio.Features.Usuarios;
@@ -7,46 +8,46 @@ namespace ShowManager.web.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController(IUsuarioService usuarioService) : ControllerBase
+    public class UsuarioController(IUsuarioService usuarioService, IMapper _mapper) : ControllerBase
     {
-        [Route("ObterTodos")]
-        [HttpGet]
-        public async Task<IActionResult> ObterTodos()
+        [Route("CriarUsuario")]
+        [HttpPost]
+        public async Task<IActionResult> Criar([FromBody] UsuarioAdicionarDTO usuarioAdicionarDTO)
         {
+            var usuario = _mapper.Map<Usuario>(usuarioAdicionarDTO);
 
-            return Ok(await usuarioService.Buscar());
+            await usuarioService.CriarAsync(usuario);
+
+            return Ok();
         }
 
         [Route("ObterPorID/{id}")]
         [HttpGet]
-        public async Task<IActionResult> ObterLista([FromRoute] int id)
+        public async Task<IActionResult> ObterPorId([FromRoute] int id)
         {
+            var usuario = await usuarioService.BuscarPorIDAsync(id);
 
-            return Ok(await usuarioService.BuscarPorID(id));
+            return Ok(usuario);
+        }
+
+        [Route("EditarUsuario")]
+        [HttpPost]
+        public async Task<IActionResult> Editar([FromBody] UsuarioEditarDTO usuarioEditarDTO)
+        {
+            var usuario = _mapper.Map<Usuario>(usuarioEditarDTO);
+
+            await usuarioService.AtualizarAsync(usuario);
+
+            return Ok();
         }
 
         [Route("Delete/{id}")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
+            await usuarioService.DeletarAsync(id);
 
-            return Ok(await usuarioService.Deletar(id));
-        }
-
-
-        [Route("CriarUsuario")]
-        [HttpPost] 
-        public async Task<IActionResult> Criar([FromBody] UsuarioAdicionarDTO usuarioAdicionarDTO)
-        {
-            return Ok(await usuarioService.Criar(usuarioAdicionarDTO));
-        }
-
-
-        [Route("EditarUsuario/{id}")]
-        [HttpPost]
-        public async Task<IActionResult> Editar([FromBody] UsuarioEditarDTO usuarioEditarDTO, int id)
-        {
-            return Ok(await usuarioService.Atualizar(usuarioEditarDTO, id));
+            return Ok();
         }
     }
 }

@@ -9,4 +9,9 @@ public class Organizador : Entidade
     public string Apelido { get; set; }
     public List<Show> ListaShows { get; set; }
 
+    public void Atualizar(Organizador organizadorAtualizado)
+    {
+        Apelido = organizadorAtualizado.Apelido;
+        
+    }
 }

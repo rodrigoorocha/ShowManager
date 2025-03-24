@@ -1,62 +1,47 @@
 ﻿using ShowManager.Dominio.DTO;
 using ShowManager.Dominio.Features.Shows;
+using ShowManager.Dominio.Features.Usuarios;
 using ShowManager.Infra.DataBase.Repository.Shows;
 using ShowManager.Infra.DataBase.Repository.Usuarios;
 
 namespace ShowManager.Aplicacao.Services.Shows
 {
-    public class ShowService : IShowService
+    public class ShowService(ShowRepository _showRepository) : IShowService
     {
-
-        private readonly ShowRepository showRepository ;
-
-        public async Task<Show> Atualizar(ShowEditarDTO showEditarDTO, int id)
+        public async Task AtualizarAsync(Show showAtualizado)
         {
-            var show = new Show
+            var showDoBanco = await BuscarPorIDAsync(showAtualizado.Id);
+            showDoBanco.Atualizar(showAtualizado);
+            await _showRepository.SaveChangesAsync();
+        }
+
+        public async Task<Show> BuscarPorIDAsync(int id)
+        {
+            var show = await _showRepository.BuscarPorIdAsync(id);
+
+            if (show is null)
             {
-                Id = id,
-                NomeShow = showEditarDTO.NomeShow,
-                DataInicio = showEditarDTO.DataInicio,
-                DataFim = showEditarDTO.DataFim,
-                NumeroParticipantes = showEditarDTO.NumeroParticipantes,
-                Duracao = showEditarDTO.Duracao,
-                OrganizadorId = showEditarDTO.OrganizadorId,
-                Organizador = showEditarDTO.Organizador
-            };
-            return await showRepository.SaveAsync(show);
-           
+                //NotFound
+                throw new Exception();
+            }
+
+            return show;
         }
 
-        public async Task<IEnumerable<Show>?> Buscar()
+        public async Task CriarAsync(Show show)
         {
-            return await showRepository.GetAllAsync();
+            await _showRepository.Adicionar(show, true);
         }
 
-        public Task<Show?> BuscarPorID(int id)
+        public async Task DeletarAsync(int id)
         {
-            return showRepository.GetByIdAsync(id);
-        }
+            var registrosDeletados = await _showRepository.DeleteAsync(id);
 
-        public async Task<Show> Criar(ShowAdicionarDTO showAdicionarDTO)
-        {
-            var show = new Show
+            if (registrosDeletados == 0)
             {
-                NomeShow = showAdicionarDTO.NomeShow,
-                DataInicio = showAdicionarDTO.DataInicio,
-                DataFim = showAdicionarDTO.DataFim,
-                NumeroParticipantes = showAdicionarDTO.NumeroParticipantes,
-                Duracao = showAdicionarDTO.Duracao,
-                OrganizadorId = showAdicionarDTO.OrganizadorId,
-                Organizador = showAdicionarDTO.Organizador
-            };
-            return await showRepository.SaveAsync(show);
-        }
-
-        public async Task<int> Deletar(int id)
-        {
-
-            await showRepository.DeleteAsync(id);
-            return id;
+                //NotFound
+                throw new Exception();
+            }
         }
     }
 }

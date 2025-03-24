@@ -9,11 +9,13 @@ namespace ShowManager.Dominio.Features.Usuarios
 {
     public interface IUsuarioService
     {
-        Task<Usuario> Criar(UsuarioAdicionarDTO usuarioAdicionarDTO);
-        Task<int> Deletar(int id);
-        Task<Usuario> Atualizar(UsuarioEditarDTO usuarioEditarDTO, int id );
-        Task<IEnumerable<Usuario>?> Buscar();
-        Task<Usuario?> BuscarPorID(int id);
+        Task CriarAsync(Usuario usuario);
+
+        Task<Usuario> BuscarPorIDAsync(int id);
+
+        Task AtualizarAsync(Usuario usuarioAtualizado);
+
+        Task DeletarAsync(int id);
 
     }
 }

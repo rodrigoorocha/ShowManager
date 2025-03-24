@@ -20,6 +20,10 @@ public class Program
         builder.Services.AddDbContext<ShowManagerContext>(options =>
             options.UseSqlServer(connectionString));
 
+        //config do automapper
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+        builder.Services.AddAutoMapper(assemblies);
+
         // Registrando os repositórios
         builder.Services.AddScoped<IOrganizadorRepository, OrganizadorRepository>();
         builder.Services.AddScoped<IShowRepository, ShowRepository>();

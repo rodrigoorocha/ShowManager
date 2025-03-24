@@ -10,6 +10,7 @@ namespace ShowManager.Dominio.DTO
     public class ShowEditarDTO
     {
 
+        public int Id { get; set; }
         public string NomeShow { get; set; }
         public DateTime? DataInicio { get; set; }
         public DateTime? DataFim { get; set; }
