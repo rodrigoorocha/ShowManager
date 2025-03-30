@@ -32,6 +32,6 @@ public class Show : Entidade
         NumeroParticipantes = showAtualizado.NumeroParticipantes;
         Duracao = showAtualizado.Duracao;
         OrganizadorId = showAtualizado.OrganizadorId;
-        Organizador = showAtualizado.Organizador;
+        
     }
 }

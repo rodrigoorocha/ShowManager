@@ -9,6 +9,7 @@ namespace ShowManager.Dominio.DTO
 {
     public class OrganizadorEditarDTO
     {
+        public int Id { get; set; }
         public string Apelido { get; set; }
         public List<Show> ListaShows { get; set; }
     }

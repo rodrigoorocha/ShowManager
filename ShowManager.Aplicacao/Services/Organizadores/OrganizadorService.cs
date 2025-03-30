@@ -5,8 +5,15 @@ using ShowManager.Infra.DataBase.Repository.Organizadores;
 
 namespace ShowManager.Aplicacao.Services.Organizadores;
 
-public class OrganizadorService(OrganizadorRepository _organizadorRepository) : IOrganizadorService
+public class OrganizadorService : IOrganizadorService
 {
+    private readonly IOrganizadorRepository _organizadorRepository;
+
+    public OrganizadorService(IOrganizadorRepository organizadorRepository)
+    {
+        _organizadorRepository = organizadorRepository;
+    }
+
     public async Task AtualizarAsync(Organizador organizadoroAtualizado)
     {
         var OrganizadorDoBanco = await BuscarPorIDAsync(organizadoroAtualizado.Id);

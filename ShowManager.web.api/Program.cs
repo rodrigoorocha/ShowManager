@@ -1,4 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using ShowManager.Aplicacao.features.Usuarios;
+using ShowManager.Aplicacao.Services.Organizadores;
+using ShowManager.Aplicacao.Services.Shows;
 using ShowManager.Dominio.Features.Organizadores;
 using ShowManager.Dominio.Features.Shows;
 using ShowManager.Dominio.Features.Usuarios;
@@ -28,6 +31,11 @@ public class Program
         builder.Services.AddScoped<IOrganizadorRepository, OrganizadorRepository>();
         builder.Services.AddScoped<IShowRepository, ShowRepository>();
         builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
+        // Registrando os serviços
+        builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+        builder.Services.AddScoped<IShowService, ShowService>();
+        builder.Services.AddScoped<IOrganizadorService, OrganizadorService>();
 
         builder.Services.AddControllers();
 

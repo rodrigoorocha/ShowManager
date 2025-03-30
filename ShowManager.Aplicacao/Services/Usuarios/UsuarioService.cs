@@ -5,8 +5,15 @@ using ShowManager.Infra.DataBase.Repository.Usuarios;
 
 namespace ShowManager.Aplicacao.features.Usuarios;
 
-public class UsuarioService(UsuarioRepository _usuarioRepository) : IUsuarioService
+public class UsuarioService : IUsuarioService
 {
+
+    private readonly IUsuarioRepository _usuarioRepository;
+
+    public UsuarioService(IUsuarioRepository usuarioRepository)
+    {
+        _usuarioRepository = usuarioRepository;
+    }
     public async Task CriarAsync(Usuario usuario)
     {
         await _usuarioRepository.Adicionar(usuario, true);
