@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ShowManager.Aplicacao.features.Usuarios;
 using ShowManager.Aplicacao.Services.Organizadores;
@@ -27,6 +28,8 @@ public class Program
         var assemblies = AppDomain.CurrentDomain.GetAssemblies();
         builder.Services.AddAutoMapper(assemblies);
 
+        builder.Services.AddMediatR(assemblies);
+
         // Registrando os repositórios
         builder.Services.AddScoped<IOrganizadorRepository, OrganizadorRepository>();
         builder.Services.AddScoped<IShowRepository, ShowRepository>();
@@ -38,6 +41,9 @@ public class Program
         builder.Services.AddScoped<IOrganizadorService, OrganizadorService>();
 
         builder.Services.AddControllers();
+
+
+        
 
         var app = builder.Build();
 
