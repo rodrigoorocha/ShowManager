@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShowManager.Aplicacao.features.Usuarios;
+using ShowManager.Aplicacao.Services.Organizadores;
 using ShowManager.Dominio.DTO;
 using ShowManager.Dominio.Features.Organizadores;
 using ShowManager.Dominio.Features.Usuarios;
@@ -10,36 +12,29 @@ namespace ShowManager.web.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrganizadorController(IOrganizadorService organizadorService , IMapper _mapper) : ControllerBase
+    public class OrganizadorController(IMediator mediator) : ControllerBase
     {
         [Route("Criar")]
         [HttpPost]
-        public async Task<IActionResult> Criar([FromBody] OrganizadorAdicionarDTO organizadorAdicionarDTO)
+        public async Task<IActionResult> Criar([FromBody] OrganizadorCriarCommand organizadorCriarCommand)
         {
-            var organizador = _mapper.Map<Organizador>(organizadorAdicionarDTO);
-
-            await organizadorService.CriarAsync(organizador);
-
+            await mediator.Send(organizadorCriarCommand);
             return Ok();
         }
 
-        [Route("ObterPorID/{id}")]
-        [HttpGet]
-        public async Task<IActionResult> ObterPorId([FromRoute] int id)
-        {
-            var organizador = await organizadorService.BuscarPorIDAsync(id);
-
-            return Ok(organizador);
-        }
+        //[Route("ObterPorID/{id}")]
+        //[HttpGet]
+        //public async Task<IActionResult> ObterPorId([FromRoute] int id)
+        //{
+        //    var organizador = await mediator.Send(new OrganizadorObterPorIdQuery { Id = id });
+        //    return Ok(organizador);
+        //}
 
         [Route("EditarUsuario")]
         [HttpPost]
-        public async Task<IActionResult> Editar([FromBody] OrganizadorEditarDTO organizadorEditarDTO)
+        public async Task<IActionResult> Editar([FromBody] OrganizadorEditarCommand organizadorEditarCommand)
         {
-            var organizador = _mapper.Map<Organizador>(organizadorEditarDTO);
-
-            await organizadorService.AtualizarAsync(organizador);
-
+            await mediator.Send(organizadorEditarCommand);
             return Ok();
         }
 
@@ -47,11 +42,9 @@ namespace ShowManager.web.api.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            await organizadorService.DeletarAsync(id);
-
+            await mediator.Send(new OrganizadorDeletarCommand { Id = id });
             return Ok();
         }
     }
-
 }
 

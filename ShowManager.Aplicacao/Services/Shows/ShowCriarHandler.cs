@@ -5,16 +5,12 @@ using ShowManager.Infra.DataBase.Repository.Shows;
 
 namespace ShowManager.Aplicacao.Services.Shows;
 
-public class ShowCriarHandler : IRequestHandler<ShowCriarCommand, Unit>
+public class ShowCriarHandler() : IRequestHandler<ShowCriarCommand, Unit>
 {
     private readonly IShowRepository _showRepository;
     private readonly IMapper _mapper;
 
-    public ShowCriarHandler(IShowRepository showRepository, IMapper mapper)
-    {
-        _showRepository = showRepository;
-        _mapper = mapper;
-    }
+   
 
     public async Task<Unit> Handle(ShowCriarCommand request, CancellationToken cancellationToken)
     {

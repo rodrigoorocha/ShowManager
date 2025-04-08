@@ -15,15 +15,22 @@ public class ShowRepository : RepositoryBase<Show>, IShowRepository
 
     public async Task<int> AtualizarAsync(Show show)
     {
-        return await _context.Shows.Where(o => o.Id == show.Id)
-            .ExecuteUpdateAsync(x =>
-                x.SetProperty(o => o.Duracao, show.Duracao)
-                 .SetProperty(o => o.NomeShow, show.NomeShow)
-                 .SetProperty(o => o.DataInicio, show.DataInicio)
-                 .SetProperty(o => o.DataFim, show.DataFim)
-                 .SetProperty(o => o.NumeroParticipantes, show.NumeroParticipantes)
-                 .SetProperty(o => o.OrganizadorId, show.OrganizadorId)
-        );
+        var existingShow = await _context.Shows.FindAsync(show.Id);
+        if (existingShow == null)
+        {
+            throw new KeyNotFoundException("Show não encontrado.");
+        }
+
+        existingShow.Atualizar(show);
+
+        
+        if (show.OrganizadorId != 0)
+        {
+            existingShow.OrganizadorId = show.OrganizadorId;
+           
+        }
+
+        return await _context.SaveChangesAsync();
     }
 
     public  async Task<IEnumerable<Show>> BuscarTodos()

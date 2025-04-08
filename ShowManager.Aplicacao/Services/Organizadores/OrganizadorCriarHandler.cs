@@ -20,6 +20,6 @@ public class OrganizadorCriarHandler : IRequestHandler<OrganizadorCriarCommand, 
     {
         var organizador = _mapper.Map<Organizador>(request);
         await _organizadorRepository.Adicionar(organizador, true);
-        return Unit.Value;
+        return await Unit.Task;
     }
 }

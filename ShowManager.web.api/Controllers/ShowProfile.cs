@@ -11,7 +11,8 @@ namespace ShowManager.web.api.Controllers
         public ShowProfile()
         {
             CreateMap<ShowCriarCommand, Show>();
-            // CreateMap<ShowEditarCommand, Show>();
+            CreateMap<ShowEditarCommand, Show>();
+            CreateMap<ShowDeletarCommand, Show>();
             CreateMap<ShowAdicionarDTO, Show>();
             CreateMap<ShowEditarDTO, Show>();
         }

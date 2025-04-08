@@ -12,8 +12,8 @@ namespace ShowManager.web.api.Controllers
         public OrganizadorProfile()
         {
             CreateMap<OrganizadorCriarCommand, Organizador>();
-            //CreateMap<OrganizadorEditarDTO, Organizador>();
-
+            CreateMap<OrganizadorEditarCommand, Organizador>();
+            CreateMap<OrganizadorDeletarCommand, Organizador>();
         }
 
     }
