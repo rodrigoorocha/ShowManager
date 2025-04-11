@@ -1,7 +1,7 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ShowManager.Dominio.Features.Shared;
 using ShowManager.Infra.Context;
+using System.Linq.Expressions;
 
 namespace ShowManager.Infra.DataBase;
 
@@ -30,4 +30,11 @@ public class RepositoryBase<T>(ShowManagerContext context) : IRepositoryBase<T> 
     {
         await context.SaveChangesAsync();
     }
+
+    public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+    {
+        return await context.Set<T>().AnyAsync(predicate);
+    }
 }
+
+

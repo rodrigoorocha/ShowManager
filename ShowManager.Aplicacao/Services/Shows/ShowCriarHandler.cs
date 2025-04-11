@@ -10,8 +10,6 @@ public class ShowCriarHandler() : IRequestHandler<ShowCriarCommand, Unit>
     private readonly IShowRepository _showRepository;
     private readonly IMapper _mapper;
 
-   
-
     public async Task<Unit> Handle(ShowCriarCommand request, CancellationToken cancellationToken)
     {
         var show = _mapper.Map<Show>(request);

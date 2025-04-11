@@ -28,6 +28,14 @@ namespace ShowManager.web.api.Controllers
         //    return Ok(usuario);
         //}
 
+        [Route("ObterOrganizadorPorID/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> ObterOrganizadorPorId([FromRoute] int id)
+        {
+            var organizador = await mediator.Send(new UsuarioObterPorIdQuery { Id = id, TipoUsuario = TipoUsuarioEnum.Organizador });
+            return Ok(organizador);
+        }
+
         [Route("EditarUsuario")]
         [HttpPost]
         public async Task<IActionResult> Editar([FromBody] UsuarioEditarCommand usuarioEditarCommand)

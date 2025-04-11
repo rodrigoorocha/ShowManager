@@ -1,5 +1,7 @@
 ﻿
 
+using System.Linq.Expressions;
+
 namespace ShowManager.Dominio.Features.Shared;
 
 public interface IRepositoryBase<T> where T : Entidade
@@ -11,4 +13,6 @@ public interface IRepositoryBase<T> where T : Entidade
     Task<int> DeleteAsync(int id);
 
     Task SaveChangesAsync();
+
+    Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
 }

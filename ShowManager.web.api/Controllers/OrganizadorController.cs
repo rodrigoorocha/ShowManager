@@ -22,13 +22,13 @@ namespace ShowManager.web.api.Controllers
             return Ok();
         }
 
-        //[Route("ObterPorID/{id}")]
-        //[HttpGet]
-        //public async Task<IActionResult> ObterPorId([FromRoute] int id)
-        //{
-        //    var organizador = await mediator.Send(new OrganizadorObterPorIdQuery { Id = id });
-        //    return Ok(organizador);
-        //}
+        [Route("ObterPorID/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> ObterPorId([FromRoute] int id)
+        {
+            var organizador = await mediator.Send(new OrganizadorObterPorIdQuery { Id = id });
+            return Ok(organizador);
+        }
 
         [Route("EditarUsuario")]
         [HttpPost]

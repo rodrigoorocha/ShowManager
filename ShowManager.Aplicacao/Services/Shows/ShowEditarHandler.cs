@@ -2,6 +2,7 @@ using AutoMapper;
 using MediatR;
 using ShowManager.Dominio.Features.Organizadores;
 using ShowManager.Dominio.Features.Shows;
+using ShowManager.Dominio.Features.Usuarios;
 using ShowManager.Infra.DataBase.Repository.Shows;
 
 namespace ShowManager.Aplicacao.Services.Shows;
@@ -11,29 +12,28 @@ public class ShowEditarHandler : IRequestHandler<ShowEditarCommand, Unit>
     private readonly IShowRepository _showRepository;
     private readonly IMapper _mapper;
     private readonly IOrganizadorService _organizadorService;
+    private readonly IOrganizadorRepository _organizadorRepository;
 
-    public ShowEditarHandler(IShowRepository showRepository, IMapper mapper, IOrganizadorService organizadorService)
+    public ShowEditarHandler(IShowRepository showRepository, IMapper mapper, IOrganizadorService organizadorService, IOrganizadorRepository organizadorRepository)
     {
         _showRepository = showRepository;
         _mapper = mapper;
         _organizadorService = organizadorService;
+        _organizadorRepository = organizadorRepository;
     }
+
 
     public async Task<Unit> Handle(ShowEditarCommand request, CancellationToken cancellationToken)
     {
-        var organizador = await _organizadorService.BuscarPorIDAsync(request.OrganizadorId);
-        if (organizador == null)
+        var organizadorExiste = await _organizadorRepository.AnyAsync(o => o.Id == request.OrganizadorId);
+        if (!organizadorExiste)
         {
-            throw new Exception("Organizador não encontrado");
+            throw new KeyNotFoundException("Organizador não encontrado.");
         }
 
-        var show = await _showRepository.BuscarPorIdAsync(request.Id);
-        if (show == null)
-        {
-            throw new KeyNotFoundException("Show não encontrado.");
-        }
+        var show = _mapper.Map<Show>(request);
 
-        _mapper.Map(request, show);
+
 
         await _showRepository.AtualizarAsync(show);
         return Unit.Value;
