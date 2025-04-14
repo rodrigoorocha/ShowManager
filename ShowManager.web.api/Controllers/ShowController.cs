@@ -16,7 +16,7 @@ namespace ShowManager.web.api.Controllers
     {
         [Route("Criar")]
         [HttpPost]
-        public async Task<IActionResult> Criar([FromBody] ShowCriarCommand showCriarCommand)
+        public async Task<IActionResult> Criar([FromBody] ShowCriar.Command showCriarCommand)
         {
             await mediator.Send(showCriarCommand);
             return Ok();

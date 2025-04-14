@@ -10,7 +10,7 @@ namespace ShowManager.web.api.Controllers
     {
         public ShowProfile()
         {
-            CreateMap<ShowCriarCommand, Show>();
+            CreateMap<ShowCriar.Command, Show>();
             CreateMap<ShowEditarCommand, Show>();
             CreateMap<ShowDeletarCommand, Show>();
             CreateMap<ShowAdicionarDTO, Show>();
