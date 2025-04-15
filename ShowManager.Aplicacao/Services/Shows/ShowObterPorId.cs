@@ -38,6 +38,7 @@ public class ShowObterPorId
         public async Task<Show> Handle(Query request, CancellationToken cancellationToken)
         {
             var show = _mapper.Map<Show>(request);
+            show.Duracao = show.CalcularDuracao();
             await _showRepository.BuscarPorIdAsync(request.Id);
             return show;
         }

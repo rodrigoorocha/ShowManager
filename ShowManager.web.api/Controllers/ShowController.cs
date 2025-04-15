@@ -22,17 +22,17 @@ namespace ShowManager.web.api.Controllers
             return Ok();
         }
 
-        //[Route("ObterPorID/{id}")]
-        //[HttpGet]
-        //public async Task<IActionResult> ObterPorId([FromRoute] int id)
-        //{
-        //    var show = await mediator.Send(new ShowObterPorIdQuery { Id = id });
-        //    return Ok(show);
-        //}
+        [Route("ObterPorID/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> ObterPorId([FromRoute] int id)
+        {
+            var show = await mediator.Send(new ShowObterPorId { Id = id });
+            return Ok(show);
+        }
 
         [Route("Editar")]
         [HttpPost]
-        public async Task<IActionResult> Editar([FromBody] ShowEditarCommand showEditarCommand)
+        public async Task<IActionResult> Editar([FromBody] ShowEditar showEditarCommand)
         {
             await mediator.Send(showEditarCommand);
             return Ok();
@@ -42,7 +42,7 @@ namespace ShowManager.web.api.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            await mediator.Send(new ShowDeletarCommand { Id = id });
+            await mediator.Send(new ShowDeletar { Id = id });
             return Ok();
         }
     }

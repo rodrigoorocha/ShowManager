@@ -17,7 +17,7 @@ public class ShowRepository : RepositoryBase<Show>, IShowRepository
     {
         return await _context.Shows.Where(o => o.Id == show.Id)
             .ExecuteUpdateAsync(x =>
-                x.SetProperty(o => o.NomeShow, show.NomeShow)
+                x.SetProperty(o => o.Nome, show.Nome)
                  .SetProperty(o => o.DataInicio, show.DataInicio)
                  .SetProperty(o => o.DataFim, show.DataFim)
                  .SetProperty(o => o.NumeroParticipantes, show.NumeroParticipantes)

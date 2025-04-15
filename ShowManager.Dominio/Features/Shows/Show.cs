@@ -5,7 +5,7 @@ namespace ShowManager.Dominio.Features.Shows;
 
 public class Show : Entidade
 {
-    public string NomeShow { get; set; }
+    public string Nome { get; set; }
     public DateTime? DataInicio { get; set; }
     public DateTime? DataFim { get; set; }
     public int? NumeroParticipantes { get; set; }
@@ -26,12 +26,20 @@ public class Show : Entidade
 
     public void Atualizar(Show showAtualizado)
     {
-        NomeShow = showAtualizado.NomeShow;
+        Nome = showAtualizado.Nome;
         DataInicio = showAtualizado.DataInicio;
         DataFim = showAtualizado.DataFim;
         NumeroParticipantes = showAtualizado.NumeroParticipantes;
         Duracao = showAtualizado.Duracao;
         OrganizadorId = showAtualizado.OrganizadorId;
-        
+    }
+
+    public TimeSpan? CalcularDuracao()
+    {
+        if (DataInicio.HasValue && DataFim.HasValue)
+        {
+            return DataFim.Value - DataInicio.Value;
+        }
+        return null;
     }
 }

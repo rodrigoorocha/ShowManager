@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using MediatR;
+using ShowManager.Dominio.Features.Organizadores;
 using ShowManager.Dominio.Features.Shows;
 using System;
 using System.Collections.Generic;
@@ -44,10 +45,17 @@ public class ShowCriar
     public class Handler() : IRequestHandler<Command, Unit>
     {
         private readonly IShowRepository _showRepository;
+        private readonly IOrganizadorRepository _organizadorRepository;
         private readonly IMapper _mapper;
 
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
+            var organizador = await _organizadorRepository.BuscarPorIdAsync(request.OrganizadorId);
+            if (organizador == null)
+            {
+                throw new Exception("Organizador not found");
+            }
+
             var show = _mapper.Map<Show>(request);
             await _showRepository.Adicionar(show, true);
             return Unit.Value;

@@ -11,7 +11,7 @@ class ShowEntityConfiguration : IEntityTypeConfiguration<Show>
         builder.ToTable("Shows");
         builder.HasKey(o => o.Id);
 
-        builder.Property(o => o.NomeShow)
+        builder.Property(o => o.Nome)
             .HasMaxLength(200)
             .HasColumnType("nvarchar(200)")
             .IsRequired();
