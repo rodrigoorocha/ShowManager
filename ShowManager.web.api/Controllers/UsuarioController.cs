@@ -14,7 +14,7 @@ namespace ShowManager.web.api.Controllers
     {
         [Route("CriarUsuario")]
         [HttpPost]
-        public async Task<IActionResult> Criar([FromBody] UsuarioCriar usuarioCriarCommand)
+        public async Task<IActionResult> Criar([FromBody] UsuarioCriar.Command usuarioCriarCommand)
         {
             await mediator.Send(usuarioCriarCommand);
             return Ok();
@@ -32,13 +32,13 @@ namespace ShowManager.web.api.Controllers
         [HttpGet]
         public async Task<IActionResult> ObterOrganizadorPorId([FromRoute] int id)
         {
-            var organizador = await mediator.Send(new UsuarioObterPorId { Id = id, TipoUsuario = TipoUsuarioEnum.Organizador });
+            var organizador = await mediator.Send(new UsuarioObterPorId.Query { Id = id });
             return Ok(organizador);
         }
 
         [Route("EditarUsuario")]
         [HttpPost]
-        public async Task<IActionResult> Editar([FromBody] UsuarioEditar usuarioEditarCommand)
+        public async Task<IActionResult> Editar([FromBody] UsuarioEditar.Command usuarioEditarCommand)
         {
             await mediator.Send(usuarioEditarCommand);
             return Ok();
@@ -48,7 +48,7 @@ namespace ShowManager.web.api.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            await mediator.Send(new UsuarioDeletar { Id = id });
+            await mediator.Send(new UsuarioDeletar.Command { Id = id });
             return Ok();
         }
     }

@@ -8,13 +8,11 @@ namespace ShowManager.web.api.Controllers
 {
     public class OrganizadorProfile : Profile
     {
-
         public OrganizadorProfile()
         {
-            CreateMap<OrganizadorCriarCommand, Organizador>();
-            CreateMap<OrganizadorEditarCommand, Organizador>();
-            CreateMap<OrganizadorDeletarCommand, Organizador>();
+            CreateMap<OrganizadorCriar.Command, Organizador>();
+            CreateMap<OrganizadorEditar.Command, Organizador>();
+            CreateMap<OrganizadorDeletar.Command, Organizador>();
         }
-
     }
 }

@@ -9,9 +9,9 @@ namespace ShowManager.web.api.Controllers
     {
         public UsuarioProfile()
         {
-            CreateMap<UsuarioCriarCommand, Usuario>();
-            CreateMap<UsuarioEditarCommand, Usuario>();
-            CreateMap<UsuarioDeletarCommand, Usuario>();
+            CreateMap<UsuarioCriar.Command, Usuario>();
+            CreateMap<UsuarioEditar.Command, Usuario>();
+            CreateMap<UsuarioDeletar.Command, Usuario>();
         }
     }
 }

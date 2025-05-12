@@ -26,13 +26,13 @@ namespace ShowManager.web.api.Controllers
         [HttpGet]
         public async Task<IActionResult> ObterPorId([FromRoute] int id)
         {
-            var show = await mediator.Send(new ShowObterPorId { Id = id });
+            var show = await mediator.Send(new ShowObterPorId.Query { Id = id });
             return Ok(show);
         }
 
         [Route("Editar")]
         [HttpPost]
-        public async Task<IActionResult> Editar([FromBody] ShowEditar showEditarCommand)
+        public async Task<IActionResult> Editar([FromBody] ShowEditar.Command showEditarCommand)
         {
             await mediator.Send(showEditarCommand);
             return Ok();
@@ -42,7 +42,7 @@ namespace ShowManager.web.api.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            await mediator.Send(new ShowDeletar { Id = id });
+            await mediator.Send(new ShowDeletar.Command { Id = id });
             return Ok();
         }
     }

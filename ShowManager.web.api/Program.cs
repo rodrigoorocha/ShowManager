@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using ShowManager.Aplicacao.Extensions;
 using ShowManager.Aplicacao.features.Usuarios;
 using ShowManager.Aplicacao.Services.Organizadores;
 using ShowManager.Aplicacao.Services.Shows;
@@ -10,6 +11,8 @@ using ShowManager.Infra.Context;
 using ShowManager.Infra.DataBase.Repository.Organizadores;
 using ShowManager.Infra.DataBase.Repository.Shows;
 using ShowManager.Infra.DataBase.Repository.Usuarios;
+using ShowManager.Infra.Extensions;
+using ShowManager.web.api.Filters;
 
 namespace ShowManager.web.api;
 
@@ -18,32 +21,19 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-        // Adicionando o DbContext com SQL Server
-        builder.Services.AddDbContext<ShowManagerContext>(options =>
-            options.UseSqlServer(connectionString));
-
-        //config do automapper
-        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-        builder.Services.AddAutoMapper(assemblies);
-
-        builder.Services.AddMediatR(assemblies);
-
-        // Registrando os repositórios
-        builder.Services.AddScoped<IOrganizadorRepository, OrganizadorRepository>();
-        builder.Services.AddScoped<IShowRepository, ShowRepository>();
-        builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+        builder.Services.AddInfra(builder.Configuration);
+        builder.Services.AddApplication();
 
         // Registrando os serviços
         builder.Services.AddScoped<IUsuarioService, UsuarioService>();
         builder.Services.AddScoped<IShowService, ShowService>();
         builder.Services.AddScoped<IOrganizadorService, OrganizadorService>();
 
+        // Adiciona um filtro global para tratar exceções e retornar erros padronizados
+        builder.Services.AddMvc(options => options.Filters.Add(typeof(FiltroParaExcecoes)));
+
         builder.Services.AddControllers();
-
-
-        
 
         var app = builder.Build();
 
