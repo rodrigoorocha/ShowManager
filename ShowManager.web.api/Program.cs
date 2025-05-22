@@ -25,13 +25,13 @@ public class Program
         builder.Services.AddInfra(builder.Configuration);
         builder.Services.AddApplication();
 
-        // Registrando os serviços
+        // Registrando os serviÃ§os
         builder.Services.AddScoped<IUsuarioService, UsuarioService>();
         builder.Services.AddScoped<IShowService, ShowService>();
         builder.Services.AddScoped<IOrganizadorService, OrganizadorService>();
 
-        // Adiciona um filtro global para tratar exceções e retornar erros padronizados
-        builder.Services.AddMvc(options => options.Filters.Add(typeof(FiltroParaExcecoes)));
+        // Adiciona um filtro global para tratar exceÃ§Ãµes e retornar erros padronizados
+        builder.Services.AddMvc(options => options.Filters.Add<FiltroParaExcecoes>());
 
         builder.Services.AddControllers();
 
@@ -44,7 +44,7 @@ public class Program
             dbContext.Database.Migrate();
         }
 
-        // Configuração do pipeline HTTP
+        // ConfiguraÃ§Ã£o do pipeline HTTP
         app.UseHttpsRedirection();
         app.UseAuthorization();
         app.MapControllers();

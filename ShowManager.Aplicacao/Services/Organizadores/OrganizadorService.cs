@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualBasic;
 using ShowManager.Dominio.DTO;
 using ShowManager.Dominio.Features.Organizadores;
-using ShowManager.Infra.DataBase.Repository.Organizadores;
 
 namespace ShowManager.Aplicacao.Services.Organizadores;
 

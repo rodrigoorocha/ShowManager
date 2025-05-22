@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShowManager.Infra.Context;
 
@@ -11,9 +12,11 @@ using ShowManager.Infra.Context;
 namespace ShowManager.Infra.Migrations
 {
     [DbContext(typeof(ShowManagerContext))]
-    partial class ShowManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20250522042453_RenomeandoCampoNomeShow")]
+    partial class RenomeandoCampoNomeShow
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,7 +66,7 @@ namespace ShowManager.Infra.Migrations
                         .HasColumnType("time")
                         .HasDefaultValue(new TimeSpan(0, 0, 0, 0, 0));
 
-                    b.Property<string>("NomeShow")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
