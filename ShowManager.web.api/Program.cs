@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using ShowManager.Aplicacao.Extensions;
 using ShowManager.Aplicacao.features.Usuarios;
 using ShowManager.Aplicacao.Services.Organizadores;
@@ -35,6 +36,18 @@ public class Program
 
         builder.Services.AddControllers();
 
+        // Configuração do Swagger
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo 
+            { 
+                Title = "Show Manager API", 
+                Version = "v1",
+                Description = "API para gerenciamento de shows e eventos"
+            });
+        });
+
         var app = builder.Build();
 
         // Apply migrations at startup
@@ -45,6 +58,16 @@ public class Program
         }
 
         // Configuração do pipeline HTTP
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Show Manager API V1");
+                c.RoutePrefix = string.Empty; // Para servir o Swagger UI na raiz
+            });
+        }
+
         app.UseHttpsRedirection();
         app.UseAuthorization();
         app.MapControllers();
