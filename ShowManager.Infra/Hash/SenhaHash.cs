@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShowManager.Infra;
 
-public class Hash(string _chaveAdicional)
+public class SenhaHash(string _chaveAdicional)
 {
     public virtual string Encriptar(string senha)
     {

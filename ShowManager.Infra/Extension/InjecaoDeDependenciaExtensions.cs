@@ -9,6 +9,6 @@ public static class InjecaoDeDependenciaExtensions
     {
         var chaveAdicional = configuration.GetValue<string>("Settings:Password:AdditionalKey");
 
-        services.AddScoped(opt => new Hash(chaveAdicional!));
+        services.AddScoped(opt => new SenhaHash(chaveAdicional!));
     }
 }
